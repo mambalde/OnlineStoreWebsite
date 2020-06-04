@@ -10,9 +10,9 @@ public class UserTest {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		Users user1 = new Users();
-		user1.setFullname("balde saliou");
-		user1.setEmail("mambalde@gmail.com");
-		user1.setPassword("1234");
+		user1.setFullname("khoi");
+		user1.setEmail("khoi@gmail.com");
+		user1.setPassword("1234w");
 		EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("OnlineStoreWebsite");
 		EntityManager entityManager = entityManagerFactory.createEntityManager();
 
