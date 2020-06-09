@@ -5,14 +5,14 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<title>Manage Users - SMARTBUYS ADMINISTRATION</title>
+<title>Manage Categories - SMARTBUYS ADMINISTRATION</title>
 </head>
 <body>
 	<jsp:directive.include file="header.jsp" />
 	<div align="center">
-		<h2>User Management</h2>
+		<h2>Category Management</h2>
 		<h3>
-			<a href="user_form.jsp">Create New User</a>
+			<a href="category_form.jsp">Create New Category</a>
 		</h3>
 	</div>
 
@@ -28,17 +28,16 @@
 			<tr>
 				<th>Index</th>
 				<th>ID</th>
-				<th>Email</th>
-				<th>Full Name</th>
+				<th>Name</th>
 				<th>Actions</th>
 			</tr>
-			<c:forEach var="users" items="${listUsers }" varStatus="status">
+			<c:forEach var="cat" items="${listcategory }" varStatus="status">
 				<tr>
 					<td>${status.index +1 }</td>
-					<td>${users.userId }</td>
-					<td>${users.email }</td>
-					<td>${users.fullname }</td>
-					<td><a href="edit_user?id=${users.userId}">Edit</a>&nbsp; <a href="javascript:confirmDelete(${users.userId})">Delete</a></td>
+					<td>${cat.categoryId }</td>
+					<td>${cat.name }</td>
+					<td><a href="edit_category?id=${cat.categoryId}">Edit</a>&nbsp; <a
+						href="javascript:confirmDelete(${cat.categoryId})">Delete</a></td>
 				</tr>
 
 			</c:forEach>

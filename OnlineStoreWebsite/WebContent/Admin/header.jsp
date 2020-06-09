@@ -7,7 +7,7 @@
 		<br><br>
 	</div>
 	<div>
-		<a href="list_users">Users</a>| <a href="categories">Categories</a>| <a href="item">Items</a>|
+		<a href="list_users">Users</a>| <a href="list_category">Categories</a>| <a href="item">Items</a>|
 		<a href="customer">Customers</a>| <a href="review">Reviews</a> |<a href="order">Orders</a>
 	</div>
 </div>

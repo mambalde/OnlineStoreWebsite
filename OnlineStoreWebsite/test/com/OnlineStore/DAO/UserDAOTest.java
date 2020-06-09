@@ -20,6 +20,7 @@ import com.OnlineStore.Entity.Users;
 public class UserDAOTest {
 	private static EntityManagerFactory entityManagerFactory;
 	private static EntityManager entityManager;
+
 	private static UserDAO userDAO;
 
 	@BeforeClass
@@ -32,13 +33,13 @@ public class UserDAOTest {
 	@Test(expected = PersistenceException.class)
 	public void testCreateUsers() {
 		Users user1 = new Users();
-		
+
 		user1.setEmail("baldttt@java.core");
 		user1.setFullname("baldeee");
 		user1.setPassword("1eee");
 
 		user1 = userDAO.create(user1);
-		assertTrue(user1.getUserId()>0);
+		assertTrue(user1.getUserId() > 0);
 	}
 
 	@Test
@@ -97,10 +98,17 @@ public class UserDAOTest {
 	}
 
 	@Test
-	public void testCount(){
-		long totalUsers= userDAO.count();
+	public void testCount() {
+		long totalUsers = userDAO.count();
 		assertEquals(3, totalUsers);
 		System.out.println(totalUsers);
+	}
+
+	@Test
+	public void testFindByEmail() {
+		String email = "saliou@hotmail.com";
+		Users user = userDAO.findByEmail(email);
+		assertNotNull(user);
 	}
 
 	@AfterClass

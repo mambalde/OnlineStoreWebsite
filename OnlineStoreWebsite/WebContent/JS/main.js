@@ -22,3 +22,9 @@ function validateFormInput(){
 	return true;
 
 }
+
+function confirmDelete(userId){
+	if(confirm("Are you Sure you want to delete the User with id "+userId+ "?")){
+		window.location = 'delete_user?id='+userId;
+	}
+}

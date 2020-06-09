@@ -10,13 +10,33 @@ import javax.persistence.NamedQuery;
 
 @Entity
 @NamedQueries({ @NamedQuery(name = "Users.findAll", query = "SELECT u FROM Users u ORDER BY u.fullname"),
+	@NamedQuery(name="Users.findByEmail", query="SELECT u FROM Users u WHERE u.email= :email"),
 	@NamedQuery(name= "Users.countAll", query= "SELECT COUNT(u) FROM Users u")
+	
 })
 public class Users {
 	private Integer userId;
 	private String email;
 	private String fullname;
 	private String password;
+	
+	
+
+	public Users() {
+		super();
+		
+	}
+	public Users( Integer userId, String email, String fullname, String password) {
+		this(email, fullname, password);
+		this.userId = userId;
+		
+	}
+	public Users(String email, String fullname, String password) {
+		super();
+		this.email = email;
+		this.fullname = fullname;
+		this.password = password;
+	}
 
 	@Column(name = "user_id")
 	@Id
