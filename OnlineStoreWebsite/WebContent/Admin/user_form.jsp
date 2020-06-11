@@ -23,7 +23,7 @@
 		<c:if test="${users!=null}">
 			<form action="update_user" method="post"
 				onsubmit=" return validateFormInput()">
-				<input type="hidden" name="userId" value="${users.userId}"> 
+				<input type="hidden" name="userId" value="${users.userId}">
 		</c:if>
 		<c:if test="${users==null}">
 			<form action="create_user" method="post"
@@ -63,5 +63,35 @@
 
 	<jsp:directive.include file="footer.jsp" />
 </body>
-<script src="../JS/main.js" type="text/javascript"></script>
+<script type="text/javascript">
+function validateFormInput() {
+	var emailField = document.getElementById("email");
+	var nameField = document.getElementById("fullname");
+	var passwordField = document.getElementById("password");
+
+	if (emailField.value.length == 0) {
+		alert("email cannot be empty");
+		emailField.focus();
+		return false;
+	}
+
+
+if (nameField.value.length == 0) {
+	alert("name cannot be empty");
+	nameField.focus();
+	return false;
+}
+if (passwordField.value.length == 0) {
+	alert("password cannot be empty");
+	passwordField.focus();
+
+	return false;
+}
+return true;
+
+console.log("run here")
+}
+</script>
+
+
 </html>
