@@ -85,5 +85,17 @@ public class CategoryDAOTest {
 		assertEquals(1, totalCategory);
 
 	}
+	@Test
+	public void testfindByName(){
+		String name = "clothing";
+		Category category = CategoryDAO.findByName(name);
+		assertNotNull(category);
+	}
+	@Test
+	public void testfindByNameNotfound(){
+		String name = "clothing1";
+		Category category = CategoryDAO.findByName(name);
+		assertNull(category);
+	}
 
 }

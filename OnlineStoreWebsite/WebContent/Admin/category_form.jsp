@@ -6,7 +6,12 @@
 <head>
 <link rel="shortcut icon" href="">
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<title>CREATE NEW CATEGORY</title>
+<c:if test="${category!=null}">
+	<title>EDIT CATEGORY</title>
+</c:if>
+<c:if test="${category==null}">
+	<title>CREATE NEW CATEGORY</title>
+</c:if>
 </head>
 <body>
 	<jsp:directive.include file="header.jsp" />
@@ -58,18 +63,17 @@
 	<jsp:directive.include file="footer.jsp" />
 </body>
 <script type="text/javascript">
+	function validateFormInput() {
 
-function validateFormInput() {
-	
-	var CategoryNameField = document.getElementById("name");
-	if (CategoryNameField.value.length == 0) {
-		alert("name cannot be empty");
-		CategoryNameField.focus();
-		return false;
+		var CategoryNameField = document.getElementById("name");
+		if (CategoryNameField.value.length == 0) {
+			alert("name cannot be empty");
+			CategoryNameField.focus();
+			return false;
+		}
+
+		return true;
+
 	}
-	
-	return true;
-
-}
 </script>
 </html>
