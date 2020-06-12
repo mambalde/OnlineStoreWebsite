@@ -1,6 +1,6 @@
 package com.OnlineStore.Controller.Admin.Category;
 
-import com.OnlineStore.Controller.Admin.BaseServlet;
+import com.OnlineStore.Controller.BaseServlet;
 import com.OnlineStore.Service.CategoryServices;
 
 import java.io.IOException;

@@ -8,14 +8,14 @@
 </head>
 <body>
 	<jsp:directive.include file="header.jsp"/>
-	<hr>
+	
 	<div align="center">
 	<h1>main content</h1>
 	<h2>New Arrivals</h2>
 	<h3>popular</h3>
 	<h3>all time best</h3>
 	</div>
-	<hr>
+	
 	<jsp:directive.include file="footer.jsp"/>
 </body>
 </html>

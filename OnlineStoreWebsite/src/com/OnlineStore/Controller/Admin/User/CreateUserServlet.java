@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.OnlineStore.Controller.Admin.BaseServlet;
+import com.OnlineStore.Controller.BaseServlet;
 import com.OnlineStore.Service.UserServices;
 
 @WebServlet("/Admin/create_user")

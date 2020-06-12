@@ -1,4 +1,4 @@
-package com.OnlineStore.Controller.Admin;
+package com.OnlineStore.Controller;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;

@@ -80,7 +80,7 @@ public class CategoryServices {
 		if (category != null) {
 			request.setAttribute("category", category);
 		} else {
-			String message = "could not find category with id "+ catergoyId;
+			String message = "could not find category with id " + catergoyId;
 			request.setAttribute("message", message);
 			editPage = "message.jsp";
 		}
@@ -115,5 +115,24 @@ public class CategoryServices {
 			listCategory(message);
 		}
 
+	}
+
+	public void deleteCategory() throws ServletException, IOException {
+		int categoryId = Integer.parseInt(request.getParameter("id"));
+
+		String message;
+		Category category = categoryDAO.get(categoryId);
+		if (category == null) {
+			 message = "category could not be found or has been deleted";
+			request.setAttribute("message", message);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("message.jsp");
+		} else {
+			categoryDAO.delete(categoryId);
+			message = "Category has been successfully removed";
+
+			
+		}
+
+		listCategory(message);
 	}
 }
