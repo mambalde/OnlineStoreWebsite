@@ -2,6 +2,7 @@ package com.OnlineStore.DAO;
 
 import static org.junit.Assert.*;
 
+import java.awt.Stroke;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -103,6 +104,29 @@ public class UserDAOTest {
 		assertEquals(3, totalUsers);
 		System.out.println(totalUsers);
 	}
+	
+	@Test
+	public void checkLoginSuccess(){
+		String email = "talibe@gmail.com";
+		String password = "talibe";
+		boolean loginResult = userDAO.checkLogin(email, password);
+		
+		assertTrue(loginResult);
+		
+	}
+	
+	@Test
+	public void checkLoginFail(){
+		String email = "talibee@gmail.com";
+		String password = "talibee";
+		boolean loginResult = userDAO.checkLogin(email, password);
+		
+		assertFalse(loginResult);
+		
+	}
+	
+	
+	
 
 	@Test
 	public void testFindByEmail() {

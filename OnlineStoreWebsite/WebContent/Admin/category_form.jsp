@@ -51,8 +51,7 @@
 			<tr>
 				<td colspan="2" align="center"><button type="submit"
 						value="save">Save</button>
-					<button type="button" value="cancel"
-						onclick="javascript:history.go(-1);">Cancel</button></td>
+					<button type="button" value="cancel" id="cancelbutton">Cancel</button></td>
 			</tr>
 
 
@@ -73,6 +72,10 @@
 			messages:{
 				name:"category's name cannot be empty"
 			}
+		});
+		
+		$("#cancelbutton").click(function(){
+			history.go(-1);
 		});
 	});
 </script>

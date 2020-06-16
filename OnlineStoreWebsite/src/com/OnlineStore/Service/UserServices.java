@@ -12,6 +12,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.OnlineStore.DAO.HashGenerator;
 import com.OnlineStore.DAO.UserDAO;
 import com.OnlineStore.Entity.Users;
 
@@ -26,7 +27,7 @@ public class UserServices {
 
 		this.request = request;
 		this.response = response;
-	
+
 		userDAO = new UserDAO(entityManager);
 
 	}
@@ -77,15 +78,17 @@ public class UserServices {
 
 		int userId = Integer.parseInt(request.getParameter("id"));
 		Users users = userDAO.get(userId);
-		
-		if(users !=null){
-			
+
+		if (users != null) {
+
 			String editPage = "user_form.jsp";
+			
+			users.setPassword(null);
 			request.setAttribute("users", users);
 			RequestDispatcher dispatcher = request.getRequestDispatcher(editPage);
 			dispatcher.forward(request, response);
-			
-		}else{
+
+		} else {
 			String message = "User Does Not Exist:";
 			request.setAttribute("message", message);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("message.jsp");
@@ -101,25 +104,33 @@ public class UserServices {
 		String email = request.getParameter("email");
 		String fullname = request.getParameter("fullname");
 		String password = request.getParameter("password");
-		
+
 		Users usersById = userDAO.get(userId);
 		Users usersByEmail = userDAO.findByEmail(email);
-		
-		if(usersByEmail !=null && usersByEmail.getUserId() != usersById.getUserId()){
-			
-			String message="Failed to Update User's Details";
+
+		if (usersByEmail != null && usersByEmail.getUserId() != usersById.getUserId()) {
+
+			String message = "Failed to Update User's Details";
 			request.setAttribute("message", message);
-			
+
 			RequestDispatcher dispatcher = request.getRequestDispatcher("message.jsp");
 			dispatcher.forward(request, response);
+
+		} else {
 			
-		} else{
+			usersById.setEmail(email);
+			usersById.setFullname(fullname);
+			
+			if (password != null & !password.isEmpty()) {
+				String encryptedPassword = HashGenerator.generateMD5(password);
+				usersById.setPassword(encryptedPassword);				
+			}
 
-		Users users = new Users(userId, email, fullname, password);
-		userDAO.update(users);
+			//Users users = new Users(userId, email, fullname, password);
+			userDAO.update(usersById);
 
-		String mesage = "User's details has been successfully updated";
-		listUsers(mesage);
+			String mesage = "User's details has been successfully updated";
+			listUsers(mesage);
 		}
 	}
 
@@ -130,6 +141,29 @@ public class UserServices {
 		listUsers(mesage);
 	}
 
-	
+	public void checkLogin() throws ServletException, IOException {
+
+		String email = request.getParameter("email");
+		String password = request.getParameter("password");
+		boolean loginResult = userDAO.checkLogin(email, password);
+
+		if (loginResult) {
+
+			request.getSession().setAttribute("useremail", email);
+
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/Admin/");
+			dispatcher.forward(request, response);
+
+		} else {
+
+			String message = "Login failed! try again";
+
+			request.setAttribute("message", message);
+
+			RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp");
+			dispatcher.forward(request, response);
+
+		}
+	}
 
 }

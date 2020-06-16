@@ -52,8 +52,7 @@
 			<tr>
 				<td colspan="2" align="center"><button type="submit"
 						value="save">Save</button>
-					<button type="button" value="cancel"
-						onclick="javascript:history.go(-1);">Cancel</button></td>
+					<button type="button" value="cancel" id="cancelbutton">Cancel</button></td>
 			</tr>
 
 
@@ -71,17 +70,37 @@
 $(document).ready(function(){
 	$("#userform").validate({
 		rules:{
-			email: "required",
-			fullname:"required",
-			password:"required",
+			email:{
+				required: true,
+				email: true
+			},
+			
+			fullname:"required"
+			<c:if test="${users == null}">
+			    password: "required"
+			</c:if>
 		},
 		
 		messages:{
-			email:"Email field cannot be empty",
-			fullname:"Name field cannot be empty",
-			password:"Password field cannot be empty"
+			
+			email:{
+				required:"Email field cannot be empty",
+				email:"enter a valid email address"
+			},
+			
+			fullname:"Name field cannot be empty"
+			
+			<c:if test="${users == null}">
+		          password: "Please enter password"
+			</c:if>	
 		}
 	});
+	
+	
+		$("#cancelbutton").click(function(){
+			history.go(-1);
+		});
+	
 });
 	
 </script>

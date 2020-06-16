@@ -1,6 +1,10 @@
 package com.OnlineStore.DAO;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
@@ -56,6 +60,16 @@ public class JpaDAO<E> {
 
 		Query query = entityManager.createNamedQuery(queryName);
 		query.setParameter(paramName, paramValue);
+		return query.getResultList();
+	}
+	public List<E> findWithNamedQuery(String queryName, Map<String, Object>parameters) {
+
+		   Set<Entry<String, Object>> setparameters= parameters.entrySet();
+		Query query = entityManager.createNamedQuery(queryName);
+		for(Entry<String, Object> entry : setparameters){
+			query.setParameter(entry.getKey(), entry.getValue());
+		}
+		
 		return query.getResultList();
 	}
 
