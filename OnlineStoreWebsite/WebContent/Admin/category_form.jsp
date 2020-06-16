@@ -7,6 +7,8 @@
 <link rel="shortcut icon" href="">
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <link rel="stylesheet" href="../CSS/style.css">
+<script type="text/javascript" src="../JS/jquery-3.5.1.min.js"></script>
+<script type="text/javascript" src="../JS/jquery.validate.min.js"></script>
 <c:if test="${category!=null}">
 	<title>EDIT CATEGORY</title>
 </c:if>
@@ -28,14 +30,12 @@
 	</div>
 	<div align="center">
 		<c:if test="${category!=null}">
-			<form action="update_category" method="post"
-				onsubmit=" return validateFormInput()">
+			<form action="update_category" method="post" id="categoryform">
 				<input type="hidden" name="categoryId"
 					value="${category.categoryId}">
 		</c:if>
 		<c:if test="${category==null}">
-			<form action="create_category" method="post"
-				onsubmit=" return validateFormInput()">
+			<form action="create_category" method="post" id="categoryform">
 		</c:if>
 		<table class="form">
 
@@ -65,17 +65,15 @@
 	<jsp:directive.include file="footer.jsp" />
 </body>
 <script type="text/javascript">
-	function validateFormInput() {
-
-		var CategoryNameField = document.getElementById("name");
-		if (CategoryNameField.value.length == 0) {
-			alert("name cannot be empty");
-			CategoryNameField.focus();
-			return false;
-		}
-
-		return true;
-
-	}
+	$(document).ready(function(){
+		$("#categoryform").validate({
+			rules:{
+				name:"required",
+			},
+			messages:{
+				name:"category's name cannot be empty"
+			}
+		});
+	});
 </script>
 </html>

@@ -7,6 +7,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Manage Users - SMARTBUYS ADMINISTRATION</title>
 <link rel="stylesheet" href="../CSS/style.css">
+<script type="text/javascript" src="../JS/jquery-3.5.1.min.js"></script>
+<script type="text/javascript" src="../JS/jquery.validate.min.js"></script>
+
 </head>
 <body>
 	<jsp:directive.include file="header.jsp" />
@@ -38,7 +41,7 @@
 					<td>${users.email }</td>
 					<td>${users.fullname }</td>
 					<td><a href="edit_user?id=${users.userId}">Edit</a>&nbsp; <a
-						href="javascript:confirmDelete(${users.userId})">Delete</a></td>
+						href="javascript:void(0);" class="deletelink" id="${users.userId}">Delete</a></td>
 				</tr>
 
 			</c:forEach>
@@ -50,12 +53,17 @@
 	<jsp:directive.include file="footer.jsp" />
 </body>
 <script type="text/javascript">
-	function confirmDelete(userId) {
-		if (confirm("Are you Sure you want to delete the User with id "
-				+ userId + "?")) {
-			window.location = 'delete_user?id=' + userId;
-		}
-	}
+
+	$(document).ready(function(){
+		$(".deletelink").each(function(){
+			$(this).on("click", function(){
+				userId = $(this).attr("id");
+				if(confirm('Would you like to delete the user with the id '+ userId+'?')){
+					window.location = 'delete_user?id=' + userId;
+				}
+			});
+		});
+	});
 </script>
 
 </html>

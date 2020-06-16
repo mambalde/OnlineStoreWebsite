@@ -72,5 +72,12 @@ input{
 	
 }
 .message{
-	
+	font-style: italic;
+	color :blue;
+}
+
+.error{
+	color: red;
+	font-style: italic;
+	margin:5px;
 }
