@@ -1,14 +1,36 @@
 
 <div align="center">
-	<img alt="SMARTBUYS LOGO" src="../Images/adminLogo.png" width=20%>
-	<br><br>
+	<img alt="SMARTBUYSLOGO" src="../images/adminlogo.png"> <br>
+	<br>
 	<div>
-		Welcome ADMIN | <a href="logout">Logout</a>
-		<br><br>
+		Welcome ADMIN | <a href="logout">Logout</a> <br> <br>
 	</div>
-	<div>
-		<a href="list_users">Users</a>| <a href="list_category">Categories</a>| <a href="item">Items</a>|
-		<a href="customer">Customers</a>| <a href="review">Reviews</a> |<a href="order">Orders</a>
+	<div id="header-menu">
+		<div class="header-item">
+			<a href="list_users"> <img alt="adminUserLogo"
+				src="../images/adminUser.png" /><br>Users
+			</a>
+		</div>
+		<div>
+			<a href="list_category"> <img alt="categoryIcon"
+				src="../images/category.png"><br>Categories
+			</a>
+		</div>
+		<div>
+			<a href="item"> <img alt="" src="../images/items.png"><br>Items
+			</a>
+		</div>
+		<div>
+			<a href="customer"> <img alt="" src="../images/customer.png"><br>Customers
+			</a>
+		</div>
+		<div>
+			<a href="review"> <img alt="" src="../images/rating.png"><br>Reviews
+			</a>
+		</div>
+		<div>
+			<a href="order"> <img alt="" src="../images/orders.png"><br>Orders
+			</a>
+		</div>
 	</div>
 </div>
-

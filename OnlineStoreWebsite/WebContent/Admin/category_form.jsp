@@ -6,6 +6,7 @@
 <head>
 <link rel="shortcut icon" href="">
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<link rel="stylesheet" href="../CSS/style.css">
 <c:if test="${category!=null}">
 	<title>EDIT CATEGORY</title>
 </c:if>
@@ -36,7 +37,7 @@
 			<form action="create_category" method="post"
 				onsubmit=" return validateFormInput()">
 		</c:if>
-		<table>
+		<table class="form">
 
 			<tr>
 				<td align="right">Name:</td>
@@ -48,9 +49,10 @@
 				<td>&nbsp;</td>
 			</tr>
 			<tr>
-				<td colspan="2" align="center"><input type="submit"
-					value="save"> <input type="button" value="cancel"
-					onclick="javascript:history.go(-1);"></td>
+				<td colspan="2" align="center"><button type="submit"
+						value="save">Save</button>
+					<button type="button" value="cancel"
+						onclick="javascript:history.go(-1);">Cancel</button></td>
 			</tr>
 
 

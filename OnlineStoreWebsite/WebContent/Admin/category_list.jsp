@@ -4,8 +4,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<title>Manage Categories - SMARTBUYS ADMINISTRATION</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+	<title>Manage Categories - SMARTBUYS ADMINISTRATION</title>
+	<link rel="stylesheet" href="../CSS/style.css">
 </head>
 <body>
 	<jsp:directive.include file="header.jsp" />
@@ -13,6 +14,7 @@
 		<h2>Category Management</h2>
 		<h3>
 			<a href="category_form.jsp">Create New Category</a>
+			
 		</h3>
 	</div>
 

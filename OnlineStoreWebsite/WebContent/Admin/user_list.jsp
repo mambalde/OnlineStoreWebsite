@@ -6,11 +6,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Manage Users - SMARTBUYS ADMINISTRATION</title>
+<link rel="stylesheet" href="../CSS/style.css">
 </head>
 <body>
 	<jsp:directive.include file="header.jsp" />
 	<div align="center">
-		<h2>User Management</h2>
+		<h2 class="pageheading">User Management</h2>
 		<h3>
 			<a href="user_form.jsp">Create New User</a>
 		</h3>
@@ -18,9 +19,7 @@
 
 	<c:if test="${message !=null }">
 		<div align="center">
-			<h4>
-				<i>${message}</i>
-			</h4>
+			<h4 class="message">${message}</h4>
 		</div>
 	</c:if>
 	<div align="center">
@@ -57,7 +56,6 @@
 			window.location = 'delete_user?id=' + userId;
 		}
 	}
-
 </script>
 
 </html>

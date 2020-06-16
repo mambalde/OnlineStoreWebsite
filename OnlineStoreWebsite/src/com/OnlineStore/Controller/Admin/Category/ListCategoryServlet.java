@@ -26,6 +26,7 @@ public class ListCategoryServlet extends BaseServlet {
 
 		CategoryServices categoryServices = new CategoryServices(entityManager, request, response);
 		categoryServices.listCategory();
+		
 	}
 
 }

@@ -6,11 +6,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>SMARTBUYS ADMINISTRATION</title>
+<link rel="stylesheet" href="../CSS/style.css">
 </head>
 <body>
 	<jsp:directive.include file="header.jsp" />
 	<div align="center">
-		<h2>
+		<h2 class="pageheading">
 			<c:if test="${users!=null}">
 			Edit User:
 		</c:if>
@@ -29,7 +30,7 @@
 			<form action="create_user" method="post"
 				onsubmit=" return validateFormInput()">
 		</c:if>
-		<table>
+		<table class="form">
 			<tr>
 				<td align="right">Email:</td>
 				<td align="left"><input type="text" id="email" name="email"
@@ -49,9 +50,11 @@
 				<td>&nbsp;</td>
 			</tr>
 			<tr>
-				<td colspan="2" align="center"><input type="submit"
-					value="save"> <input type="button" value="cancel"
-					onclick="javascript:history.go(-1);"></td>
+				<td colspan="2" align="center"><button type="submit"
+						value="save">Save</button>
+					<button type="button" value="cancel"
+							onclick="javascript:history.go(-1);">Cancel
+					</button></td>
 			</tr>
 
 
@@ -64,33 +67,32 @@
 	<jsp:directive.include file="footer.jsp" />
 </body>
 <script type="text/javascript">
-function validateFormInput() {
-	var emailField = document.getElementById("email");
-	var nameField = document.getElementById("fullname");
-	var passwordField = document.getElementById("password");
+	function validateFormInput() {
+		var emailField = document.getElementById("email");
+		var nameField = document.getElementById("fullname");
+		var passwordField = document.getElementById("password");
 
-	if (emailField.value.length == 0) {
-		alert("email cannot be empty");
-		emailField.focus();
-		return false;
+		if (emailField.value.length == 0) {
+			alert("email cannot be empty");
+			emailField.focus();
+			return false;
+		}
+
+		if (nameField.value.length == 0) {
+			alert("name cannot be empty");
+			nameField.focus();
+			return false;
+		}
+		if (passwordField.value.length == 0) {
+			alert("password cannot be empty");
+			passwordField.focus();
+
+			return false;
+		}
+		return true;
+
+		console.log("run here")
 	}
-
-
-if (nameField.value.length == 0) {
-	alert("name cannot be empty");
-	nameField.focus();
-	return false;
-}
-if (passwordField.value.length == 0) {
-	alert("password cannot be empty");
-	passwordField.focus();
-
-	return false;
-}
-return true;
-
-console.log("run here")
-}
 </script>
 
 
