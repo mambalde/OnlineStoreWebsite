@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<title>SMARTBUYS ADMINISTRATION</title>
+<title>CREATE NEW PRODUCT</title>
 <link rel="stylesheet" href="../CSS/style.css">
 <script type="text/javascript" src="../JS/jquery-3.5.1.min.js"></script>
 <script type="text/javascript" src="../JS/jquery.validate.min.js"></script>
@@ -14,38 +14,69 @@
 	<jsp:directive.include file="header.jsp" />
 	<div align="center">
 		<h2 class="pageheading">
-			<c:if test="${users!=null}">
-			Edit User:
+			<c:if test="${products!=null}">
+			Edit Product:
 		</c:if>
-			<c:if test="${users==null}">
-		Create New User:
+			<c:if test="${products==null}">
+		Create New Product:
 		</c:if>
 		</h2>
 	</div>
 	<div align="center">
-		<c:if test="${users!=null}">
-			<form action="update_user" method="post" id="userform">
+		<c:if test="${products!=null}">
+			<form action="update_product" method="post" id="productform">
 				<input type="hidden" name="userId" value="${users.userId}">
 		</c:if>
-		<c:if test="${users==null}">
+		<c:if test="${products==null}">
 			<form action="create_user" method="post" id="userform">
 		</c:if>
 		<table class="form">
 			<tr>
-				<td align="right">Email:</td>
-				<td align="left"><input type="text" id="email" name="email"
-					size="20" value="${users.email}"></td>
+				<td>Category:</td>
+				<td>
+					<select name="category">
+						<c:forEach items = "${listCategory}" var="category">
+							<option value="${category.categoryId}">
+							   	${category.name}
+							</option>
+							
+						</c:forEach>
+					</select>
+				</td>
 			</tr>
 			<tr>
-				<td align="right">Full Name:</td>
-				<td align="left"><input type="text" id="fullname"
-					name="fullname" size="20" value="${users.fullname}"></td>
+				<td align="right">Name:</td>
+				<td align="left"><input type="text" id="name" name="name"
+					size="20" value="${products.productName}"></td>
 			</tr>
 			<tr>
-				<td align="right">Password:</td>
-				<td align="left"><input type="password" id="password"
-					name="password" size="20" value="${users.password}"></td>
+				<td align="right">Size:</td>
+				<td align="left"><input type="text" id="size" name="size"
+					size="20" value="${products.size}"></td>
 			</tr>
+			<tr>
+				<td align="right">Product Image:</td>
+				<td align="left"><input type="file" id="productImage"
+					name="productImage" size="20">
+					<img alt="" src="" id="thumbnail"/>
+					
+				</td>
+					
+			</tr>
+			<tr>
+				<td align="right">Description:</td>
+				<td align="left">
+					<textarea rows="5" cols="50" name="descripton" id=" description"></textarea>
+				</td>
+				
+			</tr>
+			<tr>
+				<td align="right">Price:</td>
+				<td align="left"><input type="text" id="price"
+					name="price" size="20" value="${products.price}"></td>
+			</tr>
+			
+			
 			<tr>
 				<td>&nbsp;</td>
 			</tr>
@@ -68,6 +99,11 @@
 
 
 $(document).ready(function(){
+	
+	$('#productImage').change(function(){
+		showImageThumbnail(this);
+	});
+	
 	$("#userform").validate({
 		rules:{
 			email:{
@@ -100,9 +136,19 @@ $(document).ready(function(){
 		$("#cancelbutton").click(function(){
 			history.go(-1);
 		});
-	
+		
 });
 	
+	function showImageThumbnail(fileInput){
+		var file = fileInput.files[0];
+		var reader = new FileReader();
+		
+		reader.onload = function(e) {
+			$('#thumbnail').attr('src', e.target.result);
+		};
+		
+		reader.readAsDataURL(file);
+	}
 </script>
 
 

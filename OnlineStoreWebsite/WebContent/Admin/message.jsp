@@ -5,6 +5,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>SMARTBUYS ADMINISTRATION</title>
+<link rel="stylesheet" href="../CSS/style.css">
+<script type="text/javascript" src="../JS/jquery-3.5.1.min.js"></script>
+<script type="text/javascript" src="../JS/jquery.validate.min.js"></script>
 </head>
 <body>
 	<jsp:directive.include file="header.jsp" />

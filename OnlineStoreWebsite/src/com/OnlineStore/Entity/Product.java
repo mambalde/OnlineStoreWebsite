@@ -1,6 +1,8 @@
 package com.OnlineStore.Entity;
 // Generated 2020. 5. 25 ¿ÀÈÄ 6:24:37 by Hibernate Tools 5.2.3.Final
 
+
+import java.util.Base64;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Column;
@@ -11,8 +13,11 @@ import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 
 /**
@@ -20,6 +25,11 @@ import javax.persistence.UniqueConstraint;
  */
 @Entity
 @Table(name = "product", catalog = "onlinestoredb", uniqueConstraints = @UniqueConstraint(columnNames = "product_name"))
+@NamedQueries({
+	@NamedQuery(name = "Product.findAll" , query="SELECT b FROM Product b"),
+	@NamedQuery(name = "Product.findByName" , query="SELECT b FROM Product b WHERE b.productName = :productName"),
+	@NamedQuery( name = "Product.countAll", query = "SELECT COUNT(p) FROM Product p")
+})
 public class Product implements java.io.Serializable {
 
 	private Integer productId;
@@ -27,6 +37,7 @@ public class Product implements java.io.Serializable {
 	private String productName;
 	private String description;
 	private byte[] image;
+	private String base64Image;
 	private float price;
 	private String size;
 	private Set<Review> reviews = new HashSet<Review>(0);
@@ -139,6 +150,18 @@ public class Product implements java.io.Serializable {
 
 	public void setOrderDetailses(Set<OrderDetails> orderDetailses) {
 		this.orderDetailses = orderDetailses;
+	}
+	
+	@Transient
+	public String getBase64Image(){
+		
+		this.base64Image= Base64.getEncoder().encodeToString(this.image);
+		return this.base64Image;
+	}
+	
+	@Transient
+	public void setBase64Image(String base64Image){
+		this.base64Image = base64Image;
 	}
 
 }

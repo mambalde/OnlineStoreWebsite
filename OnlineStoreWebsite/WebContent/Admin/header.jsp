@@ -3,7 +3,9 @@
 	<img alt="SMARTBUYSLOGO" src="../images/adminlogo.png"> <br>
 	<br>
 	<div>
-		Welcome <c:out value="${sessionScope.useremail}"/> | <a href="logout">Logout</a> <br> <br>
+		Welcome
+		<c:out value="${sessionScope.useremail}" />
+		| <a href="logout">Logout</a> <br> <br>
 	</div>
 	<div id="header-menu">
 		<div class="header-item">
@@ -17,7 +19,7 @@
 			</a>
 		</div>
 		<div>
-			<a href="item"> <img alt="" src="../images/items.png"><br>Items
+			<a href="list_product"> <img alt="" src="../images/items.png"><br>Items
 			</a>
 		</div>
 		<div>
