@@ -24,25 +24,32 @@
 	</div>
 	<div align="center">
 		<c:if test="${products!=null}">
-			<form action="update_product" method="post" id="productform">
-				<input type="hidden" name="userId" value="${users.userId}">
+			<form action="update_product" method="post" id="productform"
+				enctype="multipart/form-data">
+				<input type="hidden" name="productId" value="${products.productId}">
 		</c:if>
 		<c:if test="${products==null}">
-			<form action="create_user" method="post" id="userform">
+			<form action="create_product" method="post" id="productform"
+				enctype="multipart/form-data">
 		</c:if>
 		<table class="form">
 			<tr>
 				<td>Category:</td>
-				<td>
-					<select name="category">
-						<c:forEach items = "${listCategory}" var="category">
-							<option value="${category.categoryId}">
-							   	${category.name}
+				<td><select name="category">
+						<c:forEach items="${listCategory}" var="category">
+							<c:if
+								test="${category.categoryId eq products.category.categoryId}">
+								<option value="${category.categoryId}" selected>
+							</c:if>
+							<c:if
+								test="${category.categoryId ne products.category.categoryId}">
+								<option value="${category.categoryId}">
+							</c:if>
+								${category.name}
 							</option>
-							
+
 						</c:forEach>
-					</select>
-				</td>
+				</select></td>
 			</tr>
 			<tr>
 				<td align="right">Name:</td>
@@ -57,26 +64,25 @@
 			<tr>
 				<td align="right">Product Image:</td>
 				<td align="left"><input type="file" id="productImage"
-					name="productImage" size="20">
-					<img alt="" src="" id="thumbnail"/>
-					
-				</td>
-					
+					name="productImage" size="20"><br> <img alt=""
+					src="
+					data:image/png;base64,${products.base64Image}"
+					id="thumbnail" / style="width: 20%; margin-top: 10px"></td>
+
 			</tr>
 			<tr>
 				<td align="right">Description:</td>
-				<td align="left">
-					<textarea rows="5" cols="50" name="descripton" id=" description"></textarea>
-				</td>
-				
+				<td align="left"><textarea rows="5" cols="50"
+						name="description" id="description">${products.description}</textarea></td>
+
 			</tr>
 			<tr>
 				<td align="right">Price:</td>
-				<td align="left"><input type="text" id="price"
-					name="price" size="20" value="${products.price}"></td>
+				<td align="left"><input type="text" id="price" name="price"
+					size="20" value="${products.price}"></td>
 			</tr>
-			
-			
+
+
 			<tr>
 				<td>&nbsp;</td>
 			</tr>
@@ -96,57 +102,50 @@
 	<jsp:directive.include file="footer.jsp" />
 </body>
 <script type="text/javascript">
+	$(document).ready(function() {
 
+		$('#productImage').change(function() {
+			showImageThumbnail(this);
+		});
 
-$(document).ready(function(){
-	
-	$('#productImage').change(function(){
-		showImageThumbnail(this);
-	});
-	
-	$("#userform").validate({
-		rules:{
-			email:{
-				required: true,
-				email: true
+		$("#productform").validate({
+			rules : {
+				category : "required",
+				name : "required",
+				size : "required",
+				price : "required",
+				
+				<c:if test="${products==null}">
+				productImage : "required",
+				</c:if>
+				description : "required",
+
 			},
-			
-			fullname:"required",
-			<c:if test="${users == null}">
-			    password: "required"
-			</c:if>
-		},
-		
-		messages:{
-			
-			email:{
-				required:"Email field cannot be empty",
-				email:"enter a valid email address"
-			},
-			
-			fullname:"Name field cannot be empty",
-			
-			<c:if test="${users == null}">
-		          password: "Please enter password"
-			</c:if>	
-		}
-	});
-	
-	
-		$("#cancelbutton").click(function(){
+
+			messages : {
+				category : "Select a category",
+				name : "The name is required",
+				size : "the size is required",
+				price : "the price is required",
+				productImage : "the product's image is required",
+				description : "the product's description is required"
+			}
+		});
+
+		$("#cancelbutton").click(function() {
 			history.go(-1);
 		});
-		
-});
-	
-	function showImageThumbnail(fileInput){
+
+	});
+
+	function showImageThumbnail(fileInput) {
 		var file = fileInput.files[0];
 		var reader = new FileReader();
-		
+
 		reader.onload = function(e) {
 			$('#thumbnail').attr('src', e.target.result);
 		};
-		
+
 		reader.readAsDataURL(file);
 	}
 </script>
