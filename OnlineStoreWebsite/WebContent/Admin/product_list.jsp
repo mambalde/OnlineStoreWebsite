@@ -46,7 +46,7 @@
 					</td>
 					<td>${products.productName}</td>
 					<td>${products.category.name}</td>
-					<td>${products.price}</td>
+					<td>$${products.price}</td>
 					<td>${products.size}</td>
 					
 				
@@ -67,9 +67,9 @@
 	$(document).ready(function(){
 		$(".deletelink").each(function(){
 			$(this).on("click", function(){
-				userId = $(this).attr("id");
-				if(confirm('Would you like to delete the user with the id '+ userId+'?')){
-					window.location = 'delete_user?id=' + userId;
+				productId = $(this).attr("id");
+				if(confirm('Would you like to delete the user with the id '+ productId+'?')){
+					window.location = 'delete_product?id=' + productId;
 				}
 			});
 		});

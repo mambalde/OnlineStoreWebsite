@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<div align="center">
+	<div align="center" style = "clear:both">
 		<h4>Copyright(C) 2020 By SmartBuys.co All rights reserved</h4>
 		<a href="about Us">About Us</a>| <a href="contact Us">Contact Us</a>|
 		<a href="policy">Privacy Policy</a>| <a href="shipping">Shipping

@@ -1,7 +1,6 @@
 package com.OnlineStore.Entity;
 // Generated 2020. 5. 25 ¿ÀÈÄ 6:24:37 by Hibernate Tools 5.2.3.Final
 
-
 import java.util.Base64;
 import java.util.HashSet;
 import java.util.Set;
@@ -25,10 +24,11 @@ import javax.persistence.UniqueConstraint;
  */
 @Entity
 @Table(name = "product", catalog = "onlinestoredb", uniqueConstraints = @UniqueConstraint(columnNames = "product_name"))
-@NamedQueries({
-	@NamedQuery(name = "Product.findAll" , query="SELECT b FROM Product b"),
-	@NamedQuery(name = "Product.findByName" , query="SELECT b FROM Product b WHERE b.productName = :productName"),
-	@NamedQuery( name = "Product.countAll", query = "SELECT COUNT(p) FROM Product p")
+@NamedQueries({ @NamedQuery(name = "Product.findAll", query = "SELECT b FROM Product b"),
+		@NamedQuery(name = "Product.findByName", query = "SELECT b FROM Product b WHERE b.productName = :productName"),
+		@NamedQuery(name = "Product.countAll", query = "SELECT COUNT(p) FROM Product p"),
+		@NamedQuery(name = "Product.findByCategory", query = "SELECT p FROM Product p JOIN Category c on p.category.categoryId = c.categoryId AND c.categoryId =:catId"),
+		@NamedQuery(name = "Product.ListNew", query = "SELECT p FROM Product p ORDER BY p.productName")
 })
 public class Product implements java.io.Serializable {
 
@@ -151,17 +151,42 @@ public class Product implements java.io.Serializable {
 	public void setOrderDetailses(Set<OrderDetails> orderDetailses) {
 		this.orderDetailses = orderDetailses;
 	}
-	
+
 	@Transient
-	public String getBase64Image(){
-		
-		this.base64Image= Base64.getEncoder().encodeToString(this.image);
+	public String getBase64Image() {
+
+		this.base64Image = Base64.getEncoder().encodeToString(this.image);
 		return this.base64Image;
 	}
-	
+
 	@Transient
-	public void setBase64Image(String base64Image){
+	public void setBase64Image(String base64Image) {
 		this.base64Image = base64Image;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((productId == null) ? 0 : productId.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Product other = (Product) obj;
+		if (productId == null) {
+			if (other.productId != null)
+				return false;
+		} else if (!productId.equals(other.productId))
+			return false;
+		return true;
 	}
 
 }

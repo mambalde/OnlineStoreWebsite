@@ -2,9 +2,12 @@ package com.OnlineStore.DAO;
 
 import java.util.List;
 
+
 import javax.naming.spi.DirStateFactory.Result;
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
+import org.hibernate.engine.query.spi.ReturnMetadata;
 import org.hibernate.sql.Update;
 
 import com.OnlineStore.Entity.Product;
@@ -53,7 +56,22 @@ public class ProductDAO extends JpaDAO<Product> implements GenericDAO<Product> {
 		}
 		return null;
 	}
-
+	
+	public List<Product> listByCategory(int categoryId){
+		
+		return super.findWithNamedQuery("Product.findByCategory", "catId", categoryId);
+	}
+	
+	
+	public List<Product> listNewProducts(){
+		
+		Query query = entityManager.createNamedQuery("Product.ListNew");
+		query.setFirstResult(0);
+		query.setMaxResults(4);
+		return query.getResultList();
+		
+	}
+	
 	@Override
 	public long count() {
 		

@@ -153,5 +153,22 @@ public class ProductDAOTest {
 		
 		assertEquals(2, totalProducts);
 	}
+	
+	@Test
+	public void listByCategoryTest(){
+		int categoryId = 20;
+		List<Product> products = ProductDAO.listByCategory(categoryId);
+		
+		
+		assertTrue(products.size()>0);
+	}
+	
+	@Test
+	public void listNewProductsTest(){
+		List<Product> listNewProducts = ProductDAO.listNewProducts();
+		
+		
+		assertEquals(4, listNewProducts.size());
+	}
 
 }

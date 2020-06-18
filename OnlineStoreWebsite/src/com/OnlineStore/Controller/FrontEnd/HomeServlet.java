@@ -13,7 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.OnlineStore.Controller.BaseServlet;
 import com.OnlineStore.DAO.CategoryDAO;
+import com.OnlineStore.DAO.ProductDAO;
 import com.OnlineStore.Entity.Category;
+import com.OnlineStore.Entity.Product;
 
 @WebServlet("")
 public class HomeServlet extends BaseServlet {
@@ -27,8 +29,12 @@ public class HomeServlet extends BaseServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		CategoryDAO categoryDAO = new CategoryDAO(entityManager);
-		List<Category> listCategory = categoryDAO.listAll();
+		ProductDAO productDAO = new ProductDAO(entityManager);
 		
+		List<Category> listCategory = categoryDAO.listAll();
+		List<Product> newProducts = productDAO.listNewProducts();
+		
+		request.setAttribute("newProducts", newProducts);
 		request.setAttribute("listCategory", listCategory);
 		
 		String page = "FrontEnd/index.jsp";
