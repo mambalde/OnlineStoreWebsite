@@ -7,8 +7,12 @@
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>CREATE NEW PRODUCT</title>
 <link rel="stylesheet" href="../CSS/style.css">
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="..//CSS/richtext.min.css">
+
 <script type="text/javascript" src="../JS/jquery-3.5.1.min.js"></script>
 <script type="text/javascript" src="../JS/jquery.validate.min.js"></script>
+<script type="text/javascript" src="../JS/jquery.richtext.min.js"></script>
 </head>
 <body>
 	<jsp:directive.include file="header.jsp" />
@@ -107,6 +111,9 @@
 		$('#productImage').change(function() {
 			showImageThumbnail(this);
 		});
+		
+		$('#description').richText();
+
 
 		$("#productform").validate({
 			rules : {

@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<link rel="stylesheet" href="../CSS/style.css">
+<link rel="stylesheet" href="CSS/style.css">
 <title>SMARTBUYS</title>
 </head>
 <body>
@@ -12,9 +12,9 @@
 	
 	<div align="center">
 	<h2>New Arrivals</h2>
-		<div align="center" style ="width:80%; margin: 0 auto">
+		<div class="main-container"">
 		<c:forEach items="${newProducts}" var="products">
-			<div style="display: inline-block; marging: 20px">
+			<div class="card">
 				<div>
 					<a  href="view_product?id=${products.productId}">
 					 <img alt=""
@@ -44,7 +44,7 @@
 		<h3>all time best</h3>
 	</div>
 	</div>
-	
+	<br><br>
 	<jsp:directive.include file="footer.jsp"/>
 </body>
 </html>

@@ -2,14 +2,12 @@ package com.OnlineStore.DAO;
 
 import java.util.List;
 
-import javax.persistence.EntityManager;
-
 import com.OnlineStore.Entity.Category;
 
 public class CategoryDAO extends JpaDAO<Category> implements GenericDAO<Category> {
 
-	public CategoryDAO(EntityManager entityManager) {
-		super(entityManager);
+	public CategoryDAO() {
+		super();
 		// TODO Auto-generated constructor stub
 	}
 

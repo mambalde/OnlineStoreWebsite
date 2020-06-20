@@ -3,16 +3,11 @@ package com.OnlineStore.DAO;
 import static org.junit.Assert.*;
 
 import java.io.IOException;
-import java.net.URI;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityNotFoundException;
-import javax.persistence.Persistence;
-
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -21,23 +16,19 @@ import com.OnlineStore.Entity.Category;
 import com.OnlineStore.Entity.Product;
 
 public class ProductDAOTest {
-	private static EntityManagerFactory entityManagerFactory;
-	private static EntityManager entityManager;
+	
 	private static ProductDAO ProductDAO;
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 
-		EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("OnlineStoreWebsite");
-		EntityManager entityManager = entityManagerFactory.createEntityManager();
-		ProductDAO = new ProductDAO(entityManager);
+		ProductDAO = new ProductDAO();
 	}
 
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
 		try {
-			entityManager.close();
-			entityManagerFactory.close();
+			ProductDAO.close();
 
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -133,42 +124,77 @@ public class ProductDAOTest {
 	public void findByNameTestNotExistent() {
 		String name = "Deni";
 		Product product = ProductDAO.findByName(name);
-		
+
 		assertNull(product);
 
 	}
-	
+
 	@Test
 	public void findByNameTestExistent() {
 		String name = "Denim Jacket";
 		Product product = ProductDAO.findByName(name);
-		
+
 		assertNotNull(product);
 
 	}
-	
+
 	@Test
-	public void countProductTest(){
+	public void countProductTest() {
 		long totalProducts = ProductDAO.count();
-		
+
 		assertEquals(2, totalProducts);
 	}
-	
+
 	@Test
-	public void listByCategoryTest(){
+	public void listByCategoryTest() {
 		int categoryId = 20;
 		List<Product> products = ProductDAO.listByCategory(categoryId);
+
+		assertTrue(products.size() > 0);
+	}
+
+	@Test
+	public void searchProductTest() {
+		
+		String keyword = "sandal";
+		List<Product> listResult= ProductDAO.search(keyword);
+		
+		for(Product product :listResult){
+			System.out.println(product.getProductName());
+		}
+		
+		assertEquals(3,listResult.size());
 		
 		
-		assertTrue(products.size()>0);
 	}
 	
 	@Test
-	public void listNewProductsTest(){
+    public void searchProductByDescriptionTest() {
+		
+		String keyword = "Lorem";
+		List<Product> listResult= ProductDAO.search(keyword);
+		
+		for(Product product :listResult){
+			System.out.println(product.getProductName());
+		}
+		
+		assertEquals(6,listResult.size());
+		
+		
+	}
+
+	@Test
+	public void listNewProductsTest() {
 		List<Product> listNewProducts = ProductDAO.listNewProducts();
-		
-		
+
 		assertEquals(4, listNewProducts.size());
+	}
+	
+	@Test
+	public void countByCategoryTest() {
+		int categoryId = 20;
+		long  resultList = ProductDAO.countByCategory(categoryId);
+		assertTrue(resultList==1);
 	}
 
 }

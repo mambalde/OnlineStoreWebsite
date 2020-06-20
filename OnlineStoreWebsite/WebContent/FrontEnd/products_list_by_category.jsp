@@ -14,9 +14,9 @@
 	<div align="center">
 		<h2>${category.name}</h2>
 	</div>
-	<div align="center" style ="width:80%; margin: 0 auto">
+	<div  class="main-container">
 		<c:forEach items="${listOfProducts}" var="products">
-			<div style=" display: inline-block; marging:  20px; padding: 20px ">
+			<div class="card ">
 				<div>
 					<a  href="view_product?id=${products.productId}">
 					 <img alt=""
@@ -31,9 +31,12 @@
 					</a>
 				</div>
 				<div>Rating ****</div>
-				<div>${products.size}</div>
-				<div>
+				<div class="size">${products.size}</div>
+				<div class="price">
 					<b>$${products.price}</b>
+				</div>
+				<div class="addToCart">
+					<button>Add to Cart</button>
 				</div>
 			</div>
 

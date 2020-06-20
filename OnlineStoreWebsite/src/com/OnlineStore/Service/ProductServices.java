@@ -1,11 +1,9 @@
 package com.OnlineStore.Service;
 
-import java.awt.HeadlessException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
-import javax.persistence.EntityManager;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -18,19 +16,17 @@ import com.OnlineStore.Entity.Category;
 import com.OnlineStore.Entity.Product;
 
 public class ProductServices {
-	private EntityManager entityManager;
 	private HttpServletRequest request;
 	private HttpServletResponse response;
 	private CategoryDAO categoryDAO;
 	private ProductDAO productDAO;
 
-	public ProductServices(EntityManager entityManager, HttpServletRequest request, HttpServletResponse response) {
+	public ProductServices( HttpServletRequest request, HttpServletResponse response) {
 		super();
-		this.entityManager = entityManager;
 		this.request = request;
 		this.response = response;
-		productDAO = new ProductDAO(entityManager);
-		categoryDAO = new CategoryDAO(entityManager);
+		productDAO = new ProductDAO();
+		categoryDAO = new CategoryDAO();
 	}
 
 	public void listProducts() throws ServletException, IOException {
@@ -153,7 +149,7 @@ public class ProductServices {
 		Product existProduct = productDAO.get(productId);
 		Product productByName = productDAO.findByName(name);
 
-		if (!existProduct.equals(productByName)) {
+		if (productByName != null && !existProduct.equals(productByName)) {
 
 			String message = "failed to update! product's name must be unique";
 			listProducts(message);
@@ -206,9 +202,7 @@ public class ProductServices {
 			return;
 		}else{
 			
-			List<Category> listCategory = categoryDAO.listAll();
-
-			request.setAttribute("listCategory", listCategory);
+			
 			request.setAttribute("listOfProducts", listOfProducts);
 			request.setAttribute("category", category);
 			
@@ -227,12 +221,12 @@ public class ProductServices {
 		Product product = productDAO.get(productId);
 		String detailsPage = "FrontEnd/product_detail.jsp";
 
-		List<Category> listCategory = categoryDAO.listAll();
+		
 
 		
 		if (product != null) {
 			
-			request.setAttribute("listCategory", listCategory);
+		
 			request.setAttribute("product", product);
 			
 		}else{
@@ -246,6 +240,27 @@ public class ProductServices {
 		dispatcher.forward(request, response);
 		
 		
+	}
+
+	public void search() throws ServletException, IOException {
+	
+		String keyword = request.getParameter("keyword");
+		
+		List<Product> searchResult = null;
+		if(keyword.equals("")){
+			
+			searchResult = productDAO.listAll();
+		}else{
+			searchResult = productDAO.search(keyword);
+		}
+		
+		String searchResultPage = "FrontEnd/search_result.jsp";
+		
+		request.setAttribute("keyword", keyword);
+		request.setAttribute("searchResult", searchResult);
+		
+		RequestDispatcher dispatcher = request.getRequestDispatcher(searchResultPage);
+		dispatcher.forward(request, response);
 	}
 
 }

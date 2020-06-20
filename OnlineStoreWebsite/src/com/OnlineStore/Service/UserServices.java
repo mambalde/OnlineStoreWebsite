@@ -1,12 +1,8 @@
 package com.OnlineStore.Service;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -19,16 +15,15 @@ import com.OnlineStore.Entity.Users;
 public class UserServices {
 	private UserDAO userDAO;
 
-	private EntityManager entityManager;
 	private HttpServletRequest request;
 	private HttpServletResponse response;
 
-	public UserServices(EntityManager entityManager, HttpServletRequest request, HttpServletResponse response) {
+	public UserServices( HttpServletRequest request, HttpServletResponse response) {
 
 		this.request = request;
 		this.response = response;
 
-		userDAO = new UserDAO(entityManager);
+		userDAO = new UserDAO();
 
 	}
 

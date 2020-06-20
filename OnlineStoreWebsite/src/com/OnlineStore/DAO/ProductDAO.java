@@ -2,20 +2,12 @@ package com.OnlineStore.DAO;
 
 import java.util.List;
 
-
-import javax.naming.spi.DirStateFactory.Result;
-import javax.persistence.EntityManager;
-import javax.persistence.Query;
-
-import org.hibernate.engine.query.spi.ReturnMetadata;
-import org.hibernate.sql.Update;
-
 import com.OnlineStore.Entity.Product;
 
 public class ProductDAO extends JpaDAO<Product> implements GenericDAO<Product> {
 
-	public ProductDAO(EntityManager entityManager) {
-		super(entityManager);
+	public ProductDAO() {
+		super();
 		// TODO Auto-generated constructor stub
 	}
 
@@ -62,13 +54,16 @@ public class ProductDAO extends JpaDAO<Product> implements GenericDAO<Product> {
 		return super.findWithNamedQuery("Product.findByCategory", "catId", categoryId);
 	}
 	
+   public List<Product> search(String keyword){
+		
+		return super.findWithNamedQuery("Product.search", "keyword", keyword);
+	}
+	
+	
 	
 	public List<Product> listNewProducts(){
 		
-		Query query = entityManager.createNamedQuery("Product.ListNew");
-		query.setFirstResult(0);
-		query.setMaxResults(4);
-		return query.getResultList();
+		return super.findWithNamedQuery("Product.ListNew", 0, 4);
 		
 	}
 	
@@ -77,6 +72,11 @@ public class ProductDAO extends JpaDAO<Product> implements GenericDAO<Product> {
 		
 		return super.countWithNamedQuery("Product.countAll");
 		
+	}
+	
+   public long countByCategory(int categoryId) {
+		
+		return super.countWithNamedQuery("Product.countByCategory", "catId", categoryId);
 	}
 
 }

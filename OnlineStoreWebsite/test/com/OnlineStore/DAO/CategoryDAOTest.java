@@ -4,10 +4,6 @@ import static org.junit.Assert.*;
 
 import java.util.List;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -16,25 +12,18 @@ import com.OnlineStore.Entity.Category;
 
 public class CategoryDAOTest {
 
-	private static EntityManagerFactory entityManagerFactory;
-	private static EntityManager entityManager;
-
 	private static CategoryDAO CategoryDAO;
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("OnlineStoreWebsite");
-		EntityManager entityManager = entityManagerFactory.createEntityManager();
-		CategoryDAO = new CategoryDAO(entityManager);
+		CategoryDAO = new CategoryDAO();
 	}
 
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
 
 		try {
-			entityManager.close();
-			entityManagerFactory.close();
-	
+			CategoryDAO.close();
 		} catch (Exception e) {
 			// TODO: handle exception
 		}

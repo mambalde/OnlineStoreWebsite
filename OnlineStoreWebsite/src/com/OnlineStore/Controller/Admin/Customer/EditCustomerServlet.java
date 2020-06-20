@@ -1,28 +1,28 @@
-package com.OnlineStore.Controller.FrontEnd;
-
-import com.OnlineStore.Controller.BaseServlet;
-import com.OnlineStore.Service.ProductServices;
+package com.OnlineStore.Controller.Admin.Customer;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/view_product")
-public class ViewProductServlet extends BaseServlet {
+import com.OnlineStore.Service.CustomerServices;
+
+@WebServlet("/Admin/edit_customer")
+public class EditCustomerServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	public ViewProductServlet() {
+	public EditCustomerServlet() {
+		super();
 
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		ProductServices productServices = new ProductServices(entityManager, request, response);
-		productServices.viewProductDetails();
-			
 		
+		CustomerServices customerServices = new CustomerServices(request, response);
+		customerServices.editCustomer();
 	}
 
 }

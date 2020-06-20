@@ -26,9 +26,12 @@ import javax.persistence.UniqueConstraint;
 @Table(name = "product", catalog = "onlinestoredb", uniqueConstraints = @UniqueConstraint(columnNames = "product_name"))
 @NamedQueries({ @NamedQuery(name = "Product.findAll", query = "SELECT b FROM Product b"),
 		@NamedQuery(name = "Product.findByName", query = "SELECT b FROM Product b WHERE b.productName = :productName"),
-		@NamedQuery(name = "Product.countAll", query = "SELECT COUNT(p) FROM Product p"),
+		@NamedQuery(name = "Product.countAll", query = "SELECT COUNT(*) FROM Product p"),
+		@NamedQuery(name = "Product.countByCategory", query = "SELECT COUNT(*) FROM Product p JOIN Category c on p.category.categoryId = c.categoryId AND c.categoryId =:catId"),
 		@NamedQuery(name = "Product.findByCategory", query = "SELECT p FROM Product p JOIN Category c on p.category.categoryId = c.categoryId AND c.categoryId =:catId"),
-		@NamedQuery(name = "Product.ListNew", query = "SELECT p FROM Product p ORDER BY p.productName")
+		@NamedQuery(name = "Product.ListNew", query = "SELECT p FROM Product p ORDER BY p.productName"),
+        @NamedQuery(name = "Product.search", query = "SELECT p FROM Product p WHERE p.productName LIKE '%' || :keyword || '%'"
+        +"OR p.description LIKE '%' || :keyword || '%'")
 })
 public class Product implements java.io.Serializable {
 
@@ -79,7 +82,7 @@ public class Product implements java.io.Serializable {
 		this.productId = productId;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "category_id", nullable = false)
 	public Category getCategory() {
 		return this.category;

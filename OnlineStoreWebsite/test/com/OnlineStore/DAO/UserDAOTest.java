@@ -2,16 +2,11 @@ package com.OnlineStore.DAO;
 
 import static org.junit.Assert.*;
 
-import java.awt.Stroke;
 import java.util.List;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityNotFoundException;
-import javax.persistence.Persistence;
 import javax.persistence.PersistenceException;
 
-import org.hibernate.boot.model.source.spi.PluralAttributeElementSourceBasic;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -19,16 +14,12 @@ import org.junit.Test;
 import com.OnlineStore.Entity.Users;
 
 public class UserDAOTest {
-	private static EntityManagerFactory entityManagerFactory;
-	private static EntityManager entityManager;
-
+	
 	private static UserDAO userDAO;
 
 	@BeforeClass
 	public static void setUpclass() {
-		EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("OnlineStoreWebsite");
-		EntityManager entityManager = entityManagerFactory.createEntityManager();
-		userDAO = new UserDAO(entityManager);
+		userDAO = new UserDAO();
 	}
 
 	@Test(expected = PersistenceException.class)
@@ -51,8 +42,6 @@ public class UserDAOTest {
 		user2.setFullname("bald");
 		user2.setPassword("1");
 		user2 = userDAO.update(user2);
-		String expected = "balder@java.core";
-		String actual = user2.getPassword();
 	}
 
 	@Test
@@ -138,8 +127,7 @@ public class UserDAOTest {
 	@AfterClass
 	public static void tearDownClass() {
 		try {
-			entityManager.close();
-			entityManagerFactory.close();
+			userDAO.close();
 		} catch (Exception e) {
 			System.err.println(e);
 		}

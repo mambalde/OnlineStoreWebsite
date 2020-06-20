@@ -3,32 +3,26 @@ package com.OnlineStore.Service;
 import java.io.IOException;
 import java.util.List;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.OnlineStore.DAO.CategoryDAO;
-import com.OnlineStore.DAO.UserDAO;
+import com.OnlineStore.DAO.ProductDAO;
 import com.OnlineStore.Entity.Category;
 
 public class CategoryServices {
 	private CategoryDAO categoryDAO;
 
-	private EntityManager entityManager;
 	private HttpServletRequest request;
 	private HttpServletResponse response;
 
-	public CategoryServices(EntityManager entityManager, HttpServletRequest request, HttpServletResponse response) {
+	public CategoryServices( HttpServletRequest request, HttpServletResponse response) {
 		super();
 		this.request = request;
 		this.response = response;
-		this.entityManager = entityManager;
-
-		categoryDAO = new CategoryDAO(entityManager);
+		categoryDAO = new CategoryDAO();
 
 	}
 
@@ -119,19 +113,28 @@ public class CategoryServices {
 
 	public void deleteCategory() throws ServletException, IOException {
 		int categoryId = Integer.parseInt(request.getParameter("id"));
-
-		String message;
+		ProductDAO productDAO = new ProductDAO();
+		
+		long numberOfProducts = productDAO.countByCategory(categoryId);
 		Category category = categoryDAO.get(categoryId);
-		if (category == null) {
+		
+		String message;
+		if(numberOfProducts>0){
+			
+			message = "Could not delete the Category (ID: %d) because it contains some books";
+			message= String.format(message, numberOfProducts);
+		}
+		else if(category==null){
 			 message = "category could not be found or has been deleted";
-			request.setAttribute("message", message);
-			RequestDispatcher dispatcher = request.getRequestDispatcher("message.jsp");
-		} else {
+			
+		}else{
 			categoryDAO.delete(categoryId);
 			message = "Category has been successfully removed";
-
-			
 		}
+			
+		request.setAttribute("message", message);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("message.jsp");
+		
 
 		listCategory(message);
 		
