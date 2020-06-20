@@ -9,19 +9,14 @@
 <link rel="stylesheet" href="../CSS/style.css">
 <script type="text/javascript" src="../JS/jquery-3.5.1.min.js"></script>
 <script type="text/javascript" src="../JS/jquery.validate.min.js"></script>
-<c:if test="${category!=null}">
-	<title>EDIT CATEGORY</title>
-</c:if>
-<c:if test="${category==null}">
-	<title>CREATE NEW CATEGORY</title>
-</c:if>
+
 </head>
 <body>
 	<jsp:directive.include file="header.jsp" />
 	<div align="center">
 		<h2>
-			<c:if test="${category }!=null}">
-			Edit User:
+			<c:if test="${category!=null}">
+			Edit Category:
 		</c:if>
 			<c:if test="${category==null}">
 		Create New Category

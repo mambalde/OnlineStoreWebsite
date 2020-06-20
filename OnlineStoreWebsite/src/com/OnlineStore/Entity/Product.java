@@ -30,9 +30,8 @@ import javax.persistence.UniqueConstraint;
 		@NamedQuery(name = "Product.countByCategory", query = "SELECT COUNT(*) FROM Product p JOIN Category c on p.category.categoryId = c.categoryId AND c.categoryId =:catId"),
 		@NamedQuery(name = "Product.findByCategory", query = "SELECT p FROM Product p JOIN Category c on p.category.categoryId = c.categoryId AND c.categoryId =:catId"),
 		@NamedQuery(name = "Product.ListNew", query = "SELECT p FROM Product p ORDER BY p.productName"),
-        @NamedQuery(name = "Product.search", query = "SELECT p FROM Product p WHERE p.productName LIKE '%' || :keyword || '%'"
-        +"OR p.description LIKE '%' || :keyword || '%'")
-})
+		@NamedQuery(name = "Product.search", query = "SELECT p FROM Product p WHERE p.productName LIKE '%' || :keyword || '%'"
+				+ "OR p.description LIKE '%' || :keyword || '%'") })
 public class Product implements java.io.Serializable {
 
 	private Integer productId;
@@ -137,7 +136,7 @@ public class Product implements java.io.Serializable {
 		this.size = size;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "product")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "product")
 	public Set<Review> getReviews() {
 		return this.reviews;
 	}
@@ -166,6 +165,49 @@ public class Product implements java.io.Serializable {
 	public void setBase64Image(String base64Image) {
 		this.base64Image = base64Image;
 	}
+
+	@Transient
+	public float getAverageRating() {
+		float averageRating = 0.0f;
+		float sum = 0.0f;
+		if (reviews.isEmpty()) {
+			return 0.0f;
+		}
+		for (Review review : reviews) {
+			sum += review.getRating();
+		}
+		averageRating = sum / reviews.size();
+		return averageRating;
+	}
+	
+	@Transient
+	public String getRatingStars() {
+		float averageRating = getAverageRating();
+		
+		return getRatingString(averageRating);
+	}
+
+	@Transient
+	public String getRatingString(float averageRating) {
+		String result = "";
+		int numberOfstarsOn = (int) averageRating;
+		for(int i=1; i<= numberOfstarsOn; i++) {
+			result +="on,";
+		}
+		
+		int next = numberOfstarsOn+1;
+		if(averageRating > numberOfstarsOn) {
+			result+="half,";
+			next++;
+		}
+		
+		for(int j = next; j <= 5; j++) {
+			result += "off,";
+		}
+		return result.substring(0, result.length()-1);
+	}
+	
+	
 
 	@Override
 	public int hashCode() {

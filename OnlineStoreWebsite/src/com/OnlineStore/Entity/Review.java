@@ -10,6 +10,8 @@ import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -19,6 +21,10 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "review", catalog = "onlinestoredb")
+@NamedQueries({
+	@NamedQuery(name="Review.listAll", query = "SELECT r FROM Review r ORDER BY r.reviwedTime DESC"),
+	@NamedQuery(name="Review.countAll", query = "SELECT COUNT(r) FROM Review r")
+})
 public class Review implements java.io.Serializable {
 
 	private Integer reviewId;
@@ -53,7 +59,7 @@ public class Review implements java.io.Serializable {
 		this.reviewId = reviewId;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "customer_id", nullable = false)
 	public Customer getCustomer() {
 		return this.customer;
@@ -63,7 +69,7 @@ public class Review implements java.io.Serializable {
 		this.customer = customer;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "product_id", nullable = false)
 	public Product getProduct() {
 		return this.product;

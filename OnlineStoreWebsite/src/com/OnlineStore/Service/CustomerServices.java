@@ -87,8 +87,6 @@ public class CustomerServices extends CommonUtility {
 			customer.setPassword(encryptedPassword);				
 		}		
 		
-
-		customer.setEmail(email);
 		customer.setAddress(address);
 		customer.setFullname(fullname);
 		customer.setCountry(country);
@@ -227,6 +225,15 @@ public class CustomerServices extends CommonUtility {
 		String EditprofilePage = "FrontEnd/edit_profile.jsp";
 		RequestDispatcher dispatcher =  request.getRequestDispatcher(EditprofilePage);
 		dispatcher.forward(request, response);
+		
+	}
+
+	public void updateCustomerProfile() throws ServletException, IOException {
+		Customer customer = (Customer) request.getSession().getAttribute("loggedCustomer");
+		updateCustomerFieldsFromForm(customer);
+		
+		customerDAO.update(customer);
+		showCustomerProfile();
 		
 	}
 

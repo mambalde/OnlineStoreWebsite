@@ -34,7 +34,7 @@
 						<a href="view_product?id=${products.productId}"> <b>${products.productName}</b>
 						</a>
 					</div>
-					<div>Rating ****</div>
+					    <jsp:directive.include file="product_rating.jsp" />
 					<div class="size">
 						<h3>Size: ${products.size}</h3>
 					</div>

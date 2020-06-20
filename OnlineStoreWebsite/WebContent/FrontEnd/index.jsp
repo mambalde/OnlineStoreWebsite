@@ -8,43 +8,44 @@
 <title>SMARTBUYS</title>
 </head>
 <body>
-	<jsp:directive.include file="header.jsp"/>
-	
+	<jsp:directive.include file="header.jsp" />
+
 	<div align="center">
-	<h2>New Arrivals</h2>
+		<h2>New Arrivals</h2>
 		<div class="main-container"">
-		<c:forEach items="${newProducts}" var="products">
-			<div class="card">
-				<div>
-					<a  href="view_product?id=${products.productId}">
-					 <img alt=""
-						src="data:image/png;base64,${products.base64Image}" width="128"
-						height="164" />
-					</a>
+			<c:forEach items="${newProducts}" var="products">
+				<div class="card">
+					<div>
+						<a href="view_product?id=${products.productId}"> <img alt=""
+							src="data:image/png;base64,${products.base64Image}" width="128"
+							height="164" />
+						</a>
 
+					</div>
+					<div>
+						<a href="view_product?id=${products.productId}"> <b>${products.productName}</b>
+						</a>
+					</div>
+					<div>
+					     <jsp:directive.include file="product_rating.jsp" />
+					</div>
+					<div>${products.size}</div>
+					<div>
+						<b>$${products.price}</b>
+					</div>
 				</div>
-				<div>
-				<a href="view_product?id=${products.productId}">
-					<b>${products.productName}</b>
-					</a>
-				</div>
-				<div>Rating ****</div>
-				<div>${products.size}</div>
-				<div>
-					<b>$${products.price}</b>
-				</div>
-			</div>
 
-		</c:forEach>
+			</c:forEach>
+		</div>
+		<div align="center" style="clear: both">
+			<h3>popular</h3>
+		</div>
+		<div align="center" style="clear: both">
+			<h3>all time best</h3>
+		</div>
 	</div>
-	<div align="center" style = "clear:both">
-		<h3>popular</h3>
-	</div>
-	<div align="center" style = "clear:both">
-		<h3>all time best</h3>
-	</div>
-	</div>
-	<br><br>
-	<jsp:directive.include file="footer.jsp"/>
+	<br>
+	<br>
+	<jsp:directive.include file="footer.jsp" />
 </body>
 </html>

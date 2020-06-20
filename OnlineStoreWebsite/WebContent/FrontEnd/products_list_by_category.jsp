@@ -30,7 +30,7 @@
 					<b>${products.productName}</b>
 					</a>
 				</div>
-				<div>Rating ****</div>
+					<jsp:directive.include file="product_rating.jsp" />
 				<div class="size">${products.size}</div>
 				<div class="price">
 					<b>$${products.price}</b>

@@ -21,49 +21,48 @@
 			<table class="form">
 				<tr>
 					<td align="right">E-mail:</td>
-					<td align="left"><input type="text" id="email" name="email"
-						size="45"></td>
+					<td>${loggedCustomer.email}</td>
 				</tr>
 				<tr>
 					<td align="right">Full Name:</td>
 					<td align="left"><input type="text" id="name" name="name"
-						size="45"></td>
-				</tr>
-				<tr>
-					<td align="right">Password:</td>
-					<td align="left"><input type="password" id="password"
-						name="password" size="45"></td>
-				</tr>
-				<tr>
-					<td align="right">Confirm Password:</td>
-					<td align="left"><input type="password" id="confirmpassword"
-						name="confirmpassword" size="45"></td>
+						size="45" value="${loggedCustomer.fullname}"></td>
 				</tr>
 				<tr>
 					<td align="right">Address:</td>
 					<td align="left"><input type="text" id="address"
-						name="address" size="45" ></td>
+						name="address" size="45" value="${loggedCustomer.address}"></td>
 
 				</tr>
 				<tr>
 					<td align="right">Phone Number:</td>
 					<td align="left"><input type="text" id="phone" name="phone"
-						size="45" ></td>
+						size="45" value="${loggedCustomer.phone}"></td>
 				</tr>
 				<tr>
 					<td align="right">Country:</td>
 					<td align="left"><input type="text" id="country"
-						name="country" size="45" ></td>
+						name="country" size="45" value="${loggedCustomer.country}"></td>
 				</tr>
 				<tr>
 					<td align="right">City:</td>
 					<td align="left"><input type="text" id="city" name="city"
-						size="45"></td>
+						size="45" value="${loggedCustomer.city}"></td>
 				</tr>
 				<tr>
 					<td align="right">Zip Code:</td>
 					<td align="left"><input type="text" id="zipcode"
-						name="zipcode" size="45" ></td>
+						name="zipcode" size="45" value="${loggedCustomer.zipcode}"></td>
+				</tr>
+				<tr>
+					<td align="right">Password:</td>
+					<td align="left"><input type="password" id="password"
+						name="password" size="45" ></td>
+				</tr>
+				<tr>
+					<td align="right">Confirm Password:</td>
+					<td align="left"><input type="password" id="confirmpassword"
+						name="confirmpassword" size="45"></td>
 				</tr>
 
 
@@ -99,10 +98,8 @@
 				address : "required",
 				country : "required",
 				city : "required",
-				password : "required",
 
 				confirmpassword : {
-					required : true,
 					equalTo : "#password"
 
 				},
@@ -123,7 +120,6 @@
 				city : "The city cannot be empty",
 				password : "The password cannot be empty",
 				confirmpassword : {
-					required : "please confirm your password",
 					equalTo : "The password does not Match"
 
 				},

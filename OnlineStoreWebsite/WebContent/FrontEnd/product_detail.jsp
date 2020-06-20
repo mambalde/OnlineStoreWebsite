@@ -19,16 +19,26 @@
 			</tr>
 			<tr>
 				<td rowspan="2"><img alt=""
-					src="data:image/png;base64,${product.base64Image}" width="128"
-					height="164" /></td>
-				<td valign="top" align="left">Rating ****</td>
+					src="data:image/png;base64,${product.base64Image}" /></td>
+				<td valign="top" align="left"><c:forTokens
+						items="${product.ratingStars}" delims="," var="star">
+						<c:if test="${star eq 'on'}">
+							<img alt="star" src="images/rating_on.png">
+						</c:if>
+						<c:if test="${star eq 'off'}">
+							<img alt="star" src="images/rating_off.png">
+						</c:if>
+						<c:if test="${star eq 'half'}">
+							<img alt="star" src="images/rating_half.png">
+						</c:if>
+
+					</c:forTokens></td>
 				<td valign="top" align="left">
 					<h3>Size: ${product.size}</h3>
 
 				</td>
 				<td valign="top" rowspan="2" width="20%">
-					<h3 class="price">Price: $${product.price}</h3> <br>
-				<br>
+					<h3 class="price">Price: $${product.price}</h3> <br> <br>
 					<button type="submit">Add to Cart</button>
 				</td>
 			</tr>
