@@ -7,12 +7,13 @@
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Customer Login</title>
 <link rel="stylesheet" href="CSS/style.css">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
 <script type="text/javascript" src="JS/jquery-3.5.1.min.js"></script>
 <script type="text/javascript" src="JS/jquery.validate.min.js"></script>
 </head>
 <body>
 <jsp:directive.include file="header.jsp" />
-	<div align="center">
+	<div align="center" class="content">
 		
 		<h2>Customer Login</h2>
 		<c:if test="${message !=null }">
@@ -45,6 +46,7 @@
 </body>
 <script type="text/javascript">
 	$(document).ready(function() {
+		
 		$("#loginform").validate({
 			rules : {
 				email : {
@@ -66,6 +68,18 @@
 			}
 		});
 
+		window.onscroll = function() {myFunction()};
+
+		var header = document.getElementById("myHeader");
+		var sticky = header.offsetTop;
+
+		function myFunction() {
+		  if (window.pageYOffset > sticky) {
+		    header.classList.add("sticky");
+		  } else {
+		    header.classList.remove("sticky");
+		  }
+		}
 	});
 </script>
 

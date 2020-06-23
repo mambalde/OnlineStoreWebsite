@@ -7,6 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>REGISTER AS A CUSTOMER</title>
 <link rel="stylesheet" href="CSS/style.css">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
 <script type="text/javascript" src="JS/jquery-3.5.1.min.js"></script>
 <script type="text/javascript" src="JS/jquery.validate.min.js"></script>
 
@@ -16,7 +17,7 @@
 	<div align="center">
 		<h2 class="pageheading">REGISTER AS A CUSTOMER</h2>
 	</div>
-	<div align="center">
+	<div align="center" class="register-form">
 		<form action="register_customer" method="post" id="customerform">
 			<table class="form">
 				<tr>

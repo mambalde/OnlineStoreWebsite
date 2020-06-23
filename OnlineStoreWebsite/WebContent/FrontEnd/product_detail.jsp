@@ -7,12 +7,13 @@
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>${product.productName}</title>
 <link rel="stylesheet" href="CSS/style.css">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
 <script type="text/javascript" src="JS/jquery-3.5.1.min.js"></script>
 </head>
 <body>
 	<jsp:directive.include file="header.jsp" />
 
-	<div class="product-main-container">
+	<div class="product-main-container, content">
 		<table class="form">
 			<tr>
 				<td colspan="3" align="left">
@@ -109,6 +110,7 @@
 </body>
 <script type="text/javascript">
 	$(document).ready(function() {
+	
 		$("#buttonWriteReview").click(function() {
 			window.location = 'write_review?product_id=' + ${product.productId};
 			;
@@ -117,6 +119,19 @@
 			window.location = 'add_to_cart?product_id=' + ${product.productId};
 			;
 		});
+		
+		window.onscroll = function() {myFunction()};
+
+		var header = document.getElementById("myHeader");
+		var sticky = header.offsetTop;
+
+		function myFunction() {
+		  if (window.pageYOffset > sticky) {
+		    header.classList.add("sticky");
+		  } else {
+		    header.classList.remove("sticky");
+		  }
+		}
 	});
 </script>
 </html>

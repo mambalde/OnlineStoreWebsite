@@ -1,8 +1,8 @@
 @CHARSET "EUC-KR";
 
 body {
-	font-family: arial;
-	background-color: #FFFFF;
+		font-family: 'Montserrat', sans-serif;
+	background-color: #f2f2f2;
 }
 
 #header-menu {
@@ -20,12 +20,28 @@ a:link {
 }
 
 a:visited {
-	color: indigo;
+	/*color: indigo;*/
 }
 
+button{
+	background-color: black;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+	box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
 a:hover {
-	color: blue;
-	text-decoration: underline;
+	/*color: blue;*/
+	text-decoration: none;
+	cursor: pointer;
 }
 
 a:active {
@@ -37,9 +53,13 @@ a:active {
 }
 
 .pageheading {
-	color: darkblue;
+	padding-left:20px;
+	color: white bold;
 }
 
+.register-form:{
+	padding: 16px;
+}
 table {
 	border: 1px solid black;
 	border-collapse: collapse;
@@ -50,8 +70,8 @@ th, td {
 }
 
 th {
-	background: darkblue;
-	color: cornsilk;
+	background: blue;
+	color: white;
 	font-size: larger;
 }
 
@@ -65,25 +85,35 @@ table.form {
 	width:60%;
 }
 
-button {
-	padding: 6px;
-	border-radius: 5px;
-}
 
+.clear-cart{
+	background-color: black;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+	box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
 button[type=submit] {
 	font-weight: bold;
 }
 
-button:hover {
-	background-color: white;
-	color: green;
+.inputfield{
+	width:400px;
+	height:20px;
+   
+    padding: 12px 20px;
+  margin: 8px 0;
 }
-
-input {
-	border: 1px solid;
-	border-radius: 4px;
-	height: 20px;
-	border-color: green;
+.search{
+	font-family: 'Montserrat', sans-serif;
 }
 
 .message {
@@ -101,22 +131,22 @@ input {
 
 .card {
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-	max-width: 400px;
+	max-width: 300px;
 	margin: 15px auto;
 	text-align: center;
-	font-family: arial;
-	padding: 30px; //
+	padding: 30px; 
 	box-sizing: border-box;
 	
 }
 
 .price, .size {
 	color: grey;
-	font-size: 22px;
+	font-size: 20px;
 }
 
-div.main-container {
-	width: 70%;
+
+.main-container {
+	width: 85%;
 	display: flex;
 	flex-wrap: wrap;
 	flex-direction: row;
@@ -124,9 +154,19 @@ div.main-container {
 	align-items: center;
 	margin: auto;
 	flex: 0 25%; 
-	//height: 100px;
+
 	box-sizing: border-box;
 	
+}
+.column {
+  float: left;
+  width: 25%;
+  padding: 5px;
+}
+.row::after {
+  content: "";
+  clear: both;
+  display: table;
 }
 
 .product-main-container {
@@ -155,14 +195,22 @@ table.product{
 	outline: 0;
 	padding: 15px;
 	color:white;
-	background-color: #000;
-	text-align: center;
+
+	justify-content:center;
+	position:relative;
 	cursor: pointer;
 	width: 100%;
 	font-size: 15px;
-	border: none;
+	
+	marging-right:10px;
 }
-
+.button-cart:hover{
+	background-color: black;
+	padding:15px;
+	cursor:pointer;
+	pointer-events:auto;
+	border: 1px;
+}
 .description{
   color: black;
   font-size: 20px;
@@ -181,8 +229,12 @@ table.product{
 }
 
 .container {
-  position: relative;
-  width: 50%;
+	margin-top:1px;
+	width: 100%;
+	overflow: hidden;
+    background-size: contain;
+    background-position: center;
+
 }
 
 .overlay {
@@ -205,3 +257,80 @@ table.product{
 .profilePageTable{
 	border:none;
 }
+
+.header{
+
+	padding-top: 20px;
+	
+}
+
+.header-menu{
+
+	padding-top: 20px;
+	width:80%;
+	
+	overflow: auto;
+	
+}
+.header-menu a{
+	padding:10px;
+	float:right;
+}
+.main-header-container{
+	background-color: #f2f2f2;
+	align-items:center;
+	
+	
+}
+#myCarousel{
+	width:100%;
+}
+.header-items{
+	width:100%;
+	background-color:black;
+	color:white;
+	 overflow: auto;
+	 height:70px;
+	 text-decoration:none;
+}
+
+.items-in-header{
+	padding-top:25px;
+	justify-content:space-around;
+	
+}
+.header-items a{
+	color:white;
+	text-align: center; 
+	text-decoration: none;
+	font-size: 15px;
+	width:7%;
+	padding:10px;
+	text-transform: uppercase;
+	font-family: 'Montserrat', sans-serif;
+	letter-spacing:2px;
+	curser:pointer;
+	
+}
+.header-items a:hover {
+	background-color: #000;
+	cursor: pointer;
+}
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index:99;
+}
+.sticky + .content {
+  padding-top: 102px;
+}
+	
+.galery{
+	box-sizing: border-box;
+	width:100%;
+	align-items: center
+}
+.wrapper {
+background-color: #f2f2f2;
+	

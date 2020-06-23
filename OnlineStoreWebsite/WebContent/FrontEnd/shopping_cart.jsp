@@ -8,6 +8,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Shopping cart</title>
 <link rel="stylesheet" href="CSS/style.css">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
 <script type="text/javascript" src="JS/jquery-3.5.1.min.js"></script>
 <script type="text/javascript" src="JS/jquery.validate.min.js"></script>
 </head>
@@ -84,7 +85,7 @@
 						<tr>
 							<td></td>
 							<td><button type="submit">Update</button></td>
-							<td><input type="button" id="clearCart" value="Clear cart"></td>
+							<td><input type="button" id="clearCart" value="Clear cart" class="clear-cart"></td>
 							<td><a href="${pageContext.request.contextPath}/">Continue
 									Shopping</a></td>
 							<td><a href="">Checkout</a></td>
@@ -106,7 +107,18 @@
 <script type="text/javascript">
 
 	$(document).ready(function() {
-		
+		window.onscroll = function() {myFunction()};
+
+		var header = document.getElementById("myHeader");
+		var sticky = header.offsetTop;
+
+		function myFunction() {
+		  if (window.pageYOffset > sticky) {
+		    header.classList.add("sticky");
+		  } else {
+		    header.classList.remove("sticky");
+		  }
+		}
 		$("#clearCart").click(function() {
 			window.location = 'clear_cart';
 		});
