@@ -2,8 +2,11 @@ package com.OnlineStore.Entity;
 // Generated 2020. 5. 25 ¿ÀÈÄ 6:24:37 by Hibernate Tools 5.2.3.Final
 
 import java.util.Base64;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.TreeSet;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -47,6 +50,11 @@ public class Product implements java.io.Serializable {
 
 	public Product() {
 	}
+	
+	public Product(Integer productId) {
+		super();
+		this.productId = productId;
+	}
 
 	public Product(Category category, String productName, String description, byte[] image, float price, String size) {
 		this.category = category;
@@ -68,6 +76,8 @@ public class Product implements java.io.Serializable {
 		this.reviews = reviews;
 		this.orderDetailses = orderDetailses;
 	}
+
+	
 
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
@@ -138,7 +148,17 @@ public class Product implements java.io.Serializable {
 
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "product")
 	public Set<Review> getReviews() {
-		return this.reviews;
+		TreeSet<Review> sortedreviews = new TreeSet<>(new Comparator<Review>() {
+
+			@Override
+			public int compare(Review review1, Review review2) {
+				
+				return review2.getReviwedTime().compareTo(review1.getReviwedTime());
+			}
+			
+		});
+		sortedreviews.addAll(reviews);
+		return sortedreviews;
 	}
 
 	public void setReviews(Set<Review> reviews) {

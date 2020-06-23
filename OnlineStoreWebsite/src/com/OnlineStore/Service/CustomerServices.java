@@ -7,6 +7,7 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.OnlineStore.DAO.CustomerDAO;
 import com.OnlineStore.DAO.HashGenerator;
@@ -203,10 +204,17 @@ public class CustomerServices extends CommonUtility {
 			request.setAttribute("message", message);
 			showLogin();
 		} else {
+			HttpSession session = request.getSession();
+			session.setAttribute("loggedCustomer", customer);
+			Object objRedirectURL = session.getAttribute("redirectURL");
 			
-			request.getSession().setAttribute("loggedCustomer", customer);
-			
-			showCustomerProfile();
+			if(objRedirectURL != null) {
+				String redirectURL = (String) objRedirectURL;
+				session.removeAttribute(redirectURL);
+				response.sendRedirect(redirectURL);
+			}else{
+				showCustomerProfile();
+			}
 
 		}
 

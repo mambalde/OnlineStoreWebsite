@@ -16,7 +16,8 @@ import javax.servlet.http.HttpSession;
 @WebFilter("/*")
 public class CustomerLoginFilter implements Filter {
 
-	private static final String[] loginRequiredURLS = { "/view_profile", "/edit_profile", "update_profile" };
+	private static final String[] loginRequiredURLS = { "/view_profile", "/edit_profile", "update_profile",
+			"write_review", "view_cart" };
 
 	public CustomerLoginFilter() {
 
@@ -43,6 +44,14 @@ public class CustomerLoginFilter implements Filter {
 		String requestURL = httpRequest.getRequestURL().toString();
 
 		if (!loggenIn && isLoginRequired(requestURL)) {
+
+			String queryString = httpRequest.getQueryString();
+			String redirectURL = requestURL;
+			if (queryString != null) {
+				redirectURL = redirectURL.concat("?").concat(queryString);
+
+			}
+			session.setAttribute("redirectURL", redirectURL);
 
 			String loginPage = "FrontEnd/login.jsp";
 

@@ -57,8 +57,12 @@ th {
 
 table.form {
 	border: 0;
-	padding: 4px;
-	width:80%;
+	
+
+}
+.reviewform{
+	border:0;
+	width:60%;
 }
 
 button {
@@ -125,9 +129,22 @@ div.main-container {
 	
 }
 
-.
-.product{
-	border:0;
+.product-main-container {
+	width: 95%;
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	margin: auto;
+	flex: 0 25%; 
+	//height: 100px;
+	box-sizing: border-box;
+	
+}
+
+table.product{
+	border:none;
 }
 
 

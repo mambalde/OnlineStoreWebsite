@@ -1,7 +1,9 @@
 package com.OnlineStore.DAO;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.OnlineStore.Entity.Review;
 
@@ -40,6 +42,19 @@ public class ReviewDAO extends JpaDAO<Review> implements GenericDAO<Review> {
 	public long count() {
 		
 		return super.countWithNamedQuery("Review.countAll");
+	}
+	
+	public Review findByCustomeAndProduct(Integer customerId, Integer productId){
+		Map<String, Object> parameters = new HashMap< >();
+		parameters.put("customerId", customerId);
+		parameters.put("productId", productId);
+		
+		List<Review> result = super.findWithNamedQuery("Review.findByCustomerAndProduct", parameters);
+		
+		if(!result.isEmpty()){
+			return result.get(0);
+		}
+		return null;
 	}
 
 }

@@ -36,7 +36,7 @@
 					<b>$${products.price}</b>
 				</div>
 				<div class="addToCart">
-					<button>Add to Cart</button>
+					<button ><a href="add_to_cart?product_id=${products.productId}">Add To Cart</a></button> 
 				</div>
 			</div>
 

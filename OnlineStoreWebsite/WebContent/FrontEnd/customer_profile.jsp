@@ -18,42 +18,43 @@
 		<h3>Welcome, ${loggedCustomer.fullname}</h3>
 
 		<br>
-	
 
-	<table class="product">
-		<tr>
-			<td>E-mail Address:</td>
-			<td>${loggedCustomer.email}</td>
-		</tr>
-		<tr>
-			<td>Full Name:</td>
-			<td>${loggedCustomer.fullname}</td>
-		</tr>
-		<tr>
-			<td>Phone:</td>
-			<td>${loggedCustomer.phone}</td>
-		</tr>
-		<tr>
-			<td>Country:</td>
-			<td>${loggedCustomer.country}</td>
-		</tr>
-		<tr>
-			<td>City:</td>
-			<td>${loggedCustomer.city}</td>
-		</tr>
-		<tr>
-			<td>Zip Code:</td>
-			<td>${loggedCustomer.zipcode}</td>
-		</tr>
-		<tr>
-			<td>&nbsp;</td>
-		</tr>
-		<tr>
-			<td colspan="2" align="center"><a href="edit_profile">Edit My Profile</a></td>
-		</tr>
-		
 
-	</table>
+		<table class="product">
+			<tr>
+				<td>E-mail Address:</td>
+				<td>${loggedCustomer.email}</td>
+			</tr>
+			<tr>
+				<td>Full Name:</td>
+				<td>${loggedCustomer.fullname}</td>
+			</tr>
+			<tr>
+				<td>Phone:</td>
+				<td>${loggedCustomer.phone}</td>
+			</tr>
+			<tr>
+				<td>Country:</td>
+				<td>${loggedCustomer.country}</td>
+			</tr>
+			<tr>
+				<td>City:</td>
+				<td>${loggedCustomer.city}</td>
+			</tr>
+			<tr>
+				<td>Zip Code:</td>
+				<td>${loggedCustomer.zipcode}</td>
+			</tr>
+			<tr>
+				<td>&nbsp;</td>
+			</tr>
+			<tr>
+				<td colspan="2" align="center"><a href="edit_profile">Edit
+						My Profile</a></td>
+			</tr>
+
+
+		</table>
 	</div>
 
 	<jsp:directive.include file="footer.jsp" />

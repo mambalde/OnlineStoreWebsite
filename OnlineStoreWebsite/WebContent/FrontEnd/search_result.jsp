@@ -40,6 +40,7 @@
 					</div>
 					<div class="price">
 						<h3>Price: $${products.price}</h3>
+						<h3><a href="add_to_cart?product_id=${products.productId}">Add To Cart</a></h3>
 					</div>
 				</div>
 

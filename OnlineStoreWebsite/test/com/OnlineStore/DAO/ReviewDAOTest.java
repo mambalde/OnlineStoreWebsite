@@ -32,13 +32,13 @@ public class ReviewDAOTest {
 		Product product = new Product();
 		product.setProductId(19);
 		Customer customer = new Customer();
-		customer.setCustomerId(9);
+		customer.setCustomerId(11);
 		review.setProduct(product);
 		review.setCustomer(customer);
 		
 		review.setHeadline("nice product");
-		review.setRating(5);
-		review.setComment("i love this product");
+		review.setRating(4);
+		review.setComment("inot bad");
 		
 		Review savedreview = reviewDAO.create(review);
 		
@@ -73,6 +73,16 @@ public class ReviewDAOTest {
 			System.out.println(review.getComment() + review.getHeadline() + review.getCustomer() + review.getProduct());
 		}
 		assertTrue(listReview.size()>0);
+	}
+	@Test
+	public void testFindByCustomerAndReviw() {
+		
+		Integer customerId = 10;
+		Integer productId = 19;
+		
+		Review result = reviewDAO.findByCustomeAndProduct(customerId, productId);
+		
+		assertNotNull(result);
 	}
 
 	@Test
